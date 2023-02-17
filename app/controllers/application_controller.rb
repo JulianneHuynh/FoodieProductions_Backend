@@ -1,20 +1,21 @@
 class ApplicationController < ActionController::API
-    
-    def current_user
-        auth_token = request.headers[ 'auth_token'] 
-        if auth_token
-            token = JWT.decode( auth_token, ENV['JWT_TOKEN'])[0]
-            return User.find_by( id: token['user'] )
-        else 
-            return nil
-        end
-    end
+    before_action :authorize
+    # def current_user
+    #     auth_token = request.headers[ 'auth_token'] 
+    #     if auth_token
+    #         token = JWT.decode( auth_token, ENV['JWT_TOKEN'])[0]
+    #         return User.find_by( id: token['user'] )
+    #     else 
+    #         return nil
+    #     end
+    # end
 
-    def authorize!
+    def authorize
+            current_user = User.find_by(id: session[:user_id]) 
         unless current_user
             render json: { errors: ['You must be logged into do that.'] }, status: :unauthorized
         end
-        end
+    end
 
     def fetch 
         # fields = [""]

@@ -1,5 +1,6 @@
 # README
 
+This is a key dependent application. To obtain a key go to https://spoonacular.com/food-api/docs#Get-Recipe-Information and create an account to access an API KEY.
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

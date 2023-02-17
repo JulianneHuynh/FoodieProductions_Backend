@@ -4,28 +4,28 @@ rescue_from ActiveRecord::RecordNotFound, with: :recipe_box_not_found
 rescue_from ActiveRecord::RecordInvalid, with: :recipe_box_invalid 
 
     def index 
-      recipe_box = Recipe_box.all
-      render json: Recipe_box.all, status: :ok 
+      recipe_box = RecipeBox.all
+      render json: RecipeBox.all, status: :ok 
     end
 
     def show 
-      recipe_box = Recipe_box.find( params[:id] )
+      recipe_box = RecipeBox.find( params[:id] )
       render json: recipe_box, status: :ok 
     end
 
     def create
-      recipe_box = Recipe_box.create!( recipe_box_params )
+      recipe_box = RecipeBox.create!( recipe_box_params )
       render json: recipe_box, status: 201
     end
 
     def update
-      recipe_box = Recipe_box.find( param[:id] )
+      recipe_box = RecipBox.find( param[:id] )
       recipe_box.update!( recipe_box_params )
       render json: recipe_box, status: :accepted
     end
 
     def destroy
-      recipe_box = Recipe_box.find( params[:id] )
+      recipe_box = RecipeBox.find( params[:id] )
       recipe_box.destroy 
       head :no_content 
     end

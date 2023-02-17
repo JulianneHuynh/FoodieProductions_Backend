@@ -4,28 +4,28 @@ rescue_from ActiveRecord::RecordNotFound, with: :opening_note_not_found
 rescue_from ActiveRecord::RecordInvalid, with: :opening_note_invalid 
 
     def index 
-      opening_note = Opening_note.all
-      render json: Opening_note.all, status: :ok 
+      opening_note = OpeningNote.all
+      render json: OpeningNote.all, status: :ok 
     end
 
     def show 
-      opening_note = Opening_note.find( params[:id] )
+      opening_note = OpeningNote.find( params[:id] )
       render json: opening_note, status: :ok 
     end
 
     def create
-      opening_note = Opening_note.create!( opening_note_params )
+      opening_note = OpeningNote.create!( opening_note_params )
       render json: opening_note, status: 201
     end
 
     def update
-      opening_note = Opening_note.find( param[:id] )
+      opening_note = OpeningNote.find( param[:id] )
       opening_note.update!( opening_note_params )
       render json: opening_note, status: :accepted
     end
 
     def destroy
-      opening_note = Opening_note.find( params[:id] )
+      opening_note = OpeningNote.find( params[:id] )
       opening_note.destroy 
       head :no_content 
     end
