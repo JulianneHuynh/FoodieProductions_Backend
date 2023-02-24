@@ -50,6 +50,4 @@ rescue_from ActiveRecord::RecordInvalid, with: :recipe_invalid
       render json: { errors: ['Recipe was not found'] }, status: 404
     end 
 
-
-  end
 end

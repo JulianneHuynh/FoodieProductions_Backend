@@ -13,7 +13,7 @@ Cookbook.destroy_all
 RecipeBox.destroy_all
 User.destroy_all
 Recipe.destroy_all
-OpeningNote.destroy_all
+OpeningNote.destroy_al
 
 puts 'Database Cleared'
 
@@ -23,7 +23,8 @@ user1 = User.create(
                     last_name: "Huynh",
                     email: "jh@gmail.com",
                     password:'123',
-                    image: 'https://thumbs.gfycat.com/AstonishingDentalGermanspitz-size_restricted.gif'
+                    image: 'https://thumbs.gfycat.com/AstonishingDentalGermanspitz-size_restricted.gif',
+                    # cookbook_id: c1.id
                     )
 puts "Users Created"
 
@@ -228,8 +229,7 @@ image = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4D-4iHVo07vwIcE
                     )}
 puts "Opening Note Created"
 
-
-puts "Creating Cookbook"
+puts "Createing Cookbook"
 c1 = Cookbook.create(
                     title: "Flatiron Eats",
                     author: "Adam Enbar",                    
