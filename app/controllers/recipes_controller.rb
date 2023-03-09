@@ -39,7 +39,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :recipe_invalid
     private 
 
     def recipe_params
-      params.require( :recipe ).permit( :name, :image, :prep_time, :cook_time, :yield, :ingredients, :ingredients )  
+      params.require( :recipe ).permit( :cookbook_id, :name, :image, :prep_time, :cook_time, :yield, :ingredients, :instructions )  
     end
 
     def recipe_invalid invalid_recipe

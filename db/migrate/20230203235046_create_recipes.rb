@@ -8,6 +8,7 @@ class CreateRecipes < ActiveRecord::Migration[7.0]
       t.string :yield
       t.text :ingredients
       t.text :instructions
+      t.belongs_to :cookbook
 
       t.timestamps
     end

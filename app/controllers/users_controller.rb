@@ -1,9 +1,15 @@
 class UsersController < ApplicationController
   skip_before_action :authorize, only: [:show, :signup, :update]
- 
+rescue_from ActiveRecord::RecordNotFound, with: :user_not_found
+
+    def index 
+      user = User.all
+      render json: User.all, status: :ok
+    end
+
      def show
        user = User.find_by( id: session[:user_id] )
-       render json: user, status: :ok 
+       render json: user, serializer: UserCookbooksSerializer, status: :ok 
      end
  
      def signup

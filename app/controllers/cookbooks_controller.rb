@@ -1,5 +1,6 @@
 class CookbooksController < ApplicationController
 
+
 rescue_from ActiveRecord::RecordNotFound, with: :cookbook_not_found
 rescue_from ActiveRecord::RecordInvalid, with: :cookbook_invalid 
 
@@ -10,7 +11,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :cookbook_invalid
 
     def show 
       cookbook = Cookbook.find( params[:id] )
-      render json: cookbook, status: :ok 
+      render json: cookbook, serializer: CookbookRecipesSerializer, status: :ok 
     end
 
     def create
@@ -33,7 +34,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :cookbook_invalid
     private 
 
     def cookbook_params
-      params.require( :cookbook ).permit( :title, :author, :cover_image, :user_id, :recipe_id, :opening_note_id)  
+      params.permit( :title, :cover_image, :user_id, :recipe_id)  
     end
 
     def cookbook_invalid invalid_cookbook
@@ -42,5 +43,5 @@ rescue_from ActiveRecord::RecordInvalid, with: :cookbook_invalid
 
     def cookbook_not_found
       render json: { errors: ['Cookbook was not found'] }, status: 404
-    end 
+    end
 end

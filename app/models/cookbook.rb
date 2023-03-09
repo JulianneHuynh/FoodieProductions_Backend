@@ -1,5 +1,7 @@
 class Cookbook < ApplicationRecord
   belongs_to :user
-  belongs_to :recipe
-  belongs_to :opening_note
+  has_many :recipes
+  # belongs_to :recipe, optional: true
+
+  # validates :recipe_id, presence: false
 end

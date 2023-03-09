@@ -9,11 +9,12 @@
 
 puts 'Clearing Database'
 
+Recipe.destroy_all
 Cookbook.destroy_all
 RecipeBox.destroy_all
 User.destroy_all
-Recipe.destroy_all
-OpeningNote.destroy_al
+
+# OpeningNote.destroy_all
 
 puts 'Database Cleared'
 
@@ -27,6 +28,16 @@ user1 = User.create(
                     # cookbook_id: c1.id
                     )
 puts "Users Created"
+
+puts "Creating Cookbook"
+c1 = Cookbook.create!(
+                    title: "Flatiron Eats",
+                    author: "Adam Enbar",                    
+                    cover_image: "https://coursereport-s3-production.global.ssl.fastly.net/uploads/school/logo/8/original/flatironschool.png",
+                    user_id: user1.id,
+                    # recipe_id: r1.id
+                        )
+puts "Cookbook created"
 
 puts "Creating Recipe"
 
@@ -57,7 +68,8 @@ r1 = Recipe.create(
                             Put into serving bowls and top with the bread crumb mixture. Sprinkle some more scallion greens on top. 
 
                             That's it! There's cauliflower in every bite. And that's a great thing.
-                            "
+                            ",
+                          cookbook_id: c1.id                                               
                           )
 
 r2 = Recipe.create(
@@ -89,7 +101,8 @@ r2 = Recipe.create(
                             Spread the seeds out over the roasting pan in a single layer, and toss them a bit to coat them with the oil on the pan.
 
                             Bake on the top rack until the seeds begin to brown, 5 to 20 minutes, depending on the size of the seeds.
-                          "
+                          ",
+                          cookbook_id: c1.id
                           )
 
 r3 = Recipe.create(
@@ -117,7 +130,8 @@ r3 = Recipe.create(
                             
                             In a bowl, mix cornmeal and grits well. In a medium saucepan, combine 3 cups water and 1/2 teaspoon salt and bring to a boil. Slowly whisk in cornmeal and grits until no lumps remain, return to a boil, then quickly reduce heat to low. Simmer, stirring occasionally to prevent grits from sticking to bottom of pan, until grits have absorbed most of the liquid and are thickening, about 3 minutes. Stir in 1 cup water and simmer 10 minutes more, stirring occasionally, until most of the liquid has been absorbed. Stir in creamed cashews and corn-onion mixture. Cover and simmer, stirring frequently, until grits are soft and fluffy, about 30 minutes.
                             
-                            Season with salt and white pepper to taste. Garnish with onion mixture."
+                            Season with salt and white pepper to taste. Garnish with onion mixture.",
+                            cookbook_id: c1.id
                             )
 
 r4 = Recipe.create(
@@ -140,7 +154,8 @@ r4 = Recipe.create(
                   instructions: "
                               Heat a skillet over moderate heat. Go 1 turn of the pan with a slow stream of extra-virgin olive oil. Add crushed garlic and red pepper flakes to the pan. Saute garlic and red pepper flakes 1 or 2 minutes. Add zucchini and season with salt, cumin and chili powder. Saute, stirring occasionally, about 3 minutes. Add chick peas, tomatoes and scallions to the pan and stir to combine. Cook over medium low heat for 10 minutes. Stir in cilantro and serve.
 
-                              To reduce the heat level, omit the red pepper flakes from the recipe and method."
+                              To reduce the heat level, omit the red pepper flakes from the recipe and method.",
+                  cookbook_id: c1.id
                               )
 
 r5= Recipe.create(
@@ -186,7 +201,8 @@ r5= Recipe.create(
                             To serve: Slice the roulades into thin rounds and serve warm with a dollop of sauce on each slice.
                             Chef's Notes
                             Keep the puff pastry in the fridge until you're ready to use it. If the pastry gets too warm and soft while you're rolling it out, just chill it for a minute before proceeding.
-                            Make sure that the meat mixture is cooled before adding to the pastry."
+                            Make sure that the meat mixture is cooled before adding to the pastry.",
+                cookbook_id: c1.id
                             )
 
 r6= Recipe.create(
@@ -215,39 +231,21 @@ r6= Recipe.create(
                               Use the immersion blender to puree the soup in the pot. If you do not have an immersion blender, you can puree the soup in a regular blender in 2 or 3 batches.
 
                               Serve hot with fresh ground black pepper and croutons sprinkled on top.
-                              "
+                              ",
+                              cookbook_id: c1.id
                   
                               )
 puts "Recipe Created"
 
-puts "Creating Opening Note"
-image = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4D-4iHVo07vwIcEXB0MYTdx2Qy4krYvBdAA&usqp=CAU", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpFYftCroTMbMWmnyLgPnFKVg2MNW_Rt7yUA&usqp=CAU", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSapy8JBv3Xm9S7ky2aSq8VRc56ja0nz3wDiA&usqp=CAU", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE8eihqP70waKITdUb8tolLTD0toNBe_utlQ&usqp=CAU", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBJxV5RXndEXgGALlx5tAVrmsubNrZZBCKCw&usqp=CAU"]
+# puts "Creating Opening Note"
 
-10.times{OpeningNote.create( 
-                    image: image.sample,
-                    description: Faker::TvShows::NewGirl.quote
-                    )}
-puts "Opening Note Created"
-
-puts "Createing Cookbook"
-c1 = Cookbook.create(
-                    title: "Flatiron Eats",
-                    author: "Adam Enbar",                    
-                    cover_image: "data:image/png;base64,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",
-                    user_id: user1.id,
-                    recipe_id: r1.id
-                        )
-puts "Cookbook created"
+# 10.times{OpeningNote.create( 
+#                     image: image.sample,
+#                     description: Faker::TvShows::NewGirl.quote
+#                     )}
+# puts "Opening Note Created"
 
 
-# puts "Creating Recipe box"
-# 10.times{RecipeBox.create(
-#                           title: Faker::Restaurant.name,
-#                           author: Faker::TvShows::BigBangTheory.character,
-#                           cover_image: image.sample,
-#                           user_id: rand(1..10)
-#                           )}
-# puts "Recipe Box created"
 
 
 puts "Done Seeding"
